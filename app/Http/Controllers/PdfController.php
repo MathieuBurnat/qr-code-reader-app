@@ -18,7 +18,7 @@ use Zxing\QrReader;
 class PdfController extends Controller
 {
     // Fonction qui traite un fichier PDF, le convertit en image JPG, lit le code QR et retourne les informations extraites
-    public function processPdf(Request $request)
+    public function fnProcessPdf(Request $request)
     {
         // Récupère le fichier envoyé depuis l'input
         $file = $request->file("pdfFile");
@@ -30,28 +30,28 @@ class PdfController extends Controller
                 $filePath = $file->getPathName();
 
                 // Initialise un objet Imagick pour le traitement d'image
-                $imagick = new Imagick();
-                $imagick->setResolution(300, 300); // Définit la résolution de l'image
-                $imagick->readImage($filePath . "[0]"); // Lit la première page du PDF
-                $imagick->setImageFormat("jpg"); // Convertit l'image au format JPG
+                $oImagick = new Imagick();
+                $oImagick->setResolution(300, 300); // Définit la résolution de l'image
+                $oImagick->readImage($filePath . "[0]"); // Lit la première page du PDF
+                $oImagick->setImageFormat("jpg"); // Convertit l'image au format JPG
 
                 // Chemin où l'image JPG sera stockée
                 $imagePath = storage_path("app/public/output_image.jpg");
-                $imagick->writeImage($imagePath); // Sauvegarde l'image convertie
+                $oImagick->writeImage($imagePath); // Sauvegarde l'image convertie
 
                 // Crée un objet QrReader pour lire le code QR de l'image
-                $qrcode = new QrReader($imagePath);
-                $text = $qrcode->text(); // Extrait le texte du code QR
+                $oQrcode = new QrReader($imagePath);
+                $strText = $oQrcode->text(); // Extrait le texte du code QR
 
                 // Vérifie si un code QR a été détecté et prépare le résultat
-                if ($text) {
-                    $result = "Code QR: " . $text;
+                if ($strText) {
+                    $strResult = "Code QR: " . $strText;
                 } else {
-                    $result = "Aucun code QR détecté.";
+                    $strResult = "Aucun code QR détecté.";
                 }
 
                 // Redirige vers la page d'accueil avec le résultat
-                return redirect("/")->with("result", $result);
+                return redirect("/")->with("result", $strResult);
             } catch (\Exception $e) {
                 // En cas d'erreur, redirige avec un message d'erreur
                 return redirect("/")->with(

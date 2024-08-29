@@ -29,4 +29,4 @@ Route::get('/', function () {
 });
 
 // Requête post pour envoyer le fichier au controller qui permet de lire le code QR d'un pdf
-Route::post('/process-pdf', [PdfController::class, 'processPdf'])->name('pdf.process');
+Route::post('/process-pdf', [PdfController::class, 'fnProcessPdf'])->name('pdf.process');
