@@ -7,6 +7,24 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+# Project
+## Installation
+### Imageick
+```sh
+# To install Imagick run bellow command:
+sudo apt-get install php-imagick
+
+# For specific PHP version:
+sudo apt-get install php8.1-imagick
+
+# Then restart apache:
+sudo service apache2 restart
+
+# To check if the extension has been installed:
+php -m | grep imagick
+
+```
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
