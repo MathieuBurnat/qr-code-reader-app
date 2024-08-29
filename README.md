@@ -8,8 +8,8 @@
 </p>
 
 # Project
-## Installation
-### Imageick
+## Imageick
+### Installation
 ```sh
 # To install Imagick run bellow command:
 sudo apt-get install php-imagick
@@ -24,6 +24,14 @@ sudo service apache2 restart
 php -m | grep imagick
 
 ```
+
+### Configuration
+
+Just before `</policymap>` in `/etc/ImageMagick-7/policy.xml` you have to add the following code : 
+```html
+<policy domain="coder" rights="read | write" pattern="PDF" />
+```
+
 
 ## About Laravel
 
