@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "calcinai/php-imagick": "^0.1.2",
         "guzzlehttp/guzzle": "^7.2",
         "khanamiryan/qrcode-detector-decoder": "^2.0",
         "laravel/framework": "^10.10",
