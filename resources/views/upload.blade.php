@@ -58,6 +58,10 @@ ChangeLog  20.08.24 | 1.0.0 MDE : Création de l'html de la page et du css, ajou
       .btns {
         padding-top: 3%;
       }
+
+      .input-container{
+        padding-top: 5%
+      }
     </style>
     <title>Lecture de Code QR</title> 
   </head>
@@ -77,6 +81,16 @@ ChangeLog  20.08.24 | 1.0.0 MDE : Création de l'html de la page et du css, ajou
         <button type="submit">Importer la facture</button>
       </form>
       <p id="result">{{ session('result') }}</p>
+      <div class="input-container">
+      <label for="iban">Iban</label><br>
+      <input id="iban" placeholder="{{ $info }}"><br>
+      <label for="iban">Fournisseur</label><br>
+      <input id="supplier" placeholder="{{ session('info.supplier') }}"><br>
+      <label for="iban">Total TTC</label><br>
+      <input id="totalTtc" placeholder="{{ session('info.totalTtc') }}"><br>
+      <label for="iban">Iban</label><br>
+      <input id="cash" placeholder="{{ session('info.cash') }}">
+      </div>
     </div>
   </body>
 </html>

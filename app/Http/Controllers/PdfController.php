@@ -41,17 +41,30 @@ class PdfController extends Controller
 
                 // Crée un objet QrReader pour lire le code QR de l'image
                 $oQrcode = new QrReader($imagePath);
-                $strText = $oQrcode->text(); // Extrait le texte du code QR
+                $strText = $oQrcode->text(); // Extrait le texte du code QR 
 
                 // Vérifie si un code QR a été détecté et prépare le résultat
                 if ($strText) {
-                    $strResult = "Code QR: " . $strText;
-                } else {
-                    $strResult = "Aucun code QR détecté.";
-                }
+                    $lines = explode("\n", $strText);
 
-                // Redirige vers la page d'accueil avec le résultat
-                return redirect("/")->with("result", $strResult);
+                    $lines = array_filter(
+                        $lines,
+                        fn($lines) => trim($lines) !== ""
+                    );
+
+                    $info = [
+                        "iban" => $lines[3] ?? null,
+                        "supplier" => $lines[5] ?? null,
+                        "totalTtc" => $lines[18] ?? null,
+                        "cash" => $lines[19] ?? null,
+                    ];
+
+
+                    return view("upload")->with($info);
+                } else {
+                    $strText = "Aucun code QR détecté.";
+                    return redirect("/")->with("result", $strText);
+                }
             } catch (\Exception $e) {
                 // En cas d'erreur, redirige avec un message d'erreur
                 return redirect("/")->with(
